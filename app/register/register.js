@@ -13,6 +13,12 @@ angular.module('myApp.register', [
   }])
 
   // Register controller
-  .controller('RegisterCtrl', [function () {
+  .controller('RegisterCtrl', ['$scope', function ($scope) {
+
+    $scope.SignUp = function () {
+      if (!$scope.regForm.$invalid) {
+        console.log('Valid form submission')
+      }
+    };
 
   }]);
