@@ -14,10 +14,10 @@ angular.module('myApp.home', [
   }])
 
   // Home controller
-  .controller('HomeCtrl', ['$scope', '$firebaseSimpleLogin', function ($scope, $firebaseSimpleLogin) {
+  .controller('HomeCtrl', ['$scope', '$firebaseAuth', function ($scope, $firebaseAuth) {
 
     var firebaseObj = new Firebase("https://angular-and-firebase.firebaseio.com/");
-    var loginObj = $firebaseSimpleLogin(firebaseObj)
+    var loginObj = $firebaseAuth(firebaseObj);
 
     $scope.user = {};
 
@@ -26,7 +26,7 @@ angular.module('myApp.home', [
       var username = $scope.user.email;
       var password = $scope.user.password;
 
-      loginObj.$login('password', {
+      loginObj.$authWithPassword({
         email: username,
         password: password
       })
