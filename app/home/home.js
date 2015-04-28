@@ -14,7 +14,7 @@ angular.module('myApp.home', [
   }])
 
   // Home controller
-  .controller('HomeCtrl', ['$scope', '$firebaseAuth', function ($scope, $firebaseAuth) {
+  .controller('HomeCtrl', ['$scope', '$location', '$firebaseAuth', function ($scope, $location, $firebaseAuth) {
 
     var firebaseObj = new Firebase("https://angular-and-firebase.firebaseio.com/");
     var loginObj = $firebaseAuth(firebaseObj);
@@ -31,9 +31,10 @@ angular.module('myApp.home', [
         password: password
       })
         .then(function (user) {
-          console.log('Auth successful')
+          console.log('Auth successful');
+          $location.path('/welcome');
         }, function (error) {
-          console.log('Auth failed')
+          console.log('Auth failed');
         });
     };
 
