@@ -29,7 +29,8 @@
     <div class="form-group" ng-class="{ 'has-error' : regForm.password.$invalid }">
       <label for="password">Password</label>
       <input ng-model="user.password" type="password" name="password" class="form-control" placeholder="Password" ng-minlength="8" id="password">
-      <p class="help-block"  ng-show="regForm.password.$error.minlength">Min password length is 8 characters.</p>
+      <p class="help-block" ng-show="regForm.password.$error.minlength">Min password length is 8 characters.</p>
+      <p class="help-block" style="color: red;" ng-show="regError">{{regErrorMessage}}</p>
     </div>
     <label class="checkbox">
       <a href="#/home"> Sign in</a>

@@ -31,6 +31,8 @@ angular.module('myApp.register', [
               $location.path('/home');
             }, function (error) {
               console.log(error);
+              $scope.regError = true;
+              $scope.regErrorMessage = error.message;
             })
         }
 
