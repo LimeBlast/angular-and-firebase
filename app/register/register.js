@@ -14,7 +14,7 @@ angular.module('myApp.register', [
   }])
 
   // Register controller
-  .controller('RegisterCtrl', ['$scope', '$firebaseAuth', function ($scope, $firebaseAuth) {
+  .controller('RegisterCtrl', ['$scope', '$location', '$firebaseAuth', function ($scope, $location, $firebaseAuth) {
 
     var firebaseObj = new Firebase("https://angular-and-firebase.firebaseio.com/");
     var auth = $firebaseAuth(firebaseObj);
@@ -28,6 +28,7 @@ angular.module('myApp.register', [
           auth.$createUser(email, password)
             .then(function () {
               console.log('User creation successful');
+              $location.path('/home');
             }, function (error) {
               console.log(error);
             })
