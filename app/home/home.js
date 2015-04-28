@@ -14,7 +14,7 @@ angular.module('myApp.home', [
   }])
 
   // Home controller
-  .controller('HomeCtrl', ['$scope', '$location', '$firebaseAuth', function ($scope, $location, $firebaseAuth) {
+  .controller('HomeCtrl', ['$scope', '$location', 'CommonProp', '$firebaseAuth', function ($scope, $location, CommonProp, $firebaseAuth) {
 
     var firebaseObj = new Firebase("https://angular-and-firebase.firebaseio.com/");
     var loginObj = $firebaseAuth(firebaseObj);
@@ -32,10 +32,24 @@ angular.module('myApp.home', [
       })
         .then(function (user) {
           console.log('Auth successful');
+          CommonProp.setUser(user.password.email);
           $location.path('/welcome');
         }, function (error) {
           console.log('Auth failed');
         });
     };
 
-  }]);
+  }])
+
+  .service('CommonProp', function () {
+    var user = '';
+
+    return {
+      getUser: function () {
+        return user;
+      },
+      setUser: function (value) {
+        user = value;
+      }
+    }
+  });
