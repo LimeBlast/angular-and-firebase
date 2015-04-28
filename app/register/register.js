@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('myApp.register', [
-  'ngRoute'
+  'ngRoute',
+  'firebase'
 ])
 
   // Declared route
@@ -13,11 +14,25 @@ angular.module('myApp.register', [
   }])
 
   // Register controller
-  .controller('RegisterCtrl', ['$scope', function ($scope) {
+  .controller('RegisterCtrl', ['$scope', '$firebaseAuth', function ($scope, $firebaseAuth) {
+
+    var firebaseObj = new Firebase("https://angular-and-firebase.firebaseio.com/");
+    var auth = $firebaseAuth(firebaseObj);
 
     $scope.SignUp = function () {
       if (!$scope.regForm.$invalid) {
-        console.log('Valid form submission')
+
+        var email = $scope.user.email;
+        var password = $scope.user.password;
+        if (email && password) {
+          auth.$createUser(email, password)
+            .then(function () {
+              console.log('User creation successful');
+            }, function (error) {
+              console.log(error);
+            })
+        }
+
       }
     };
 
