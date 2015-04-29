@@ -11,7 +11,7 @@
 
 </head>
 
-<body>
+<body ng-controller="AddPostCtrl">
 
 <div class="blog-masthead">
   <div class="container">
@@ -25,7 +25,7 @@
 
 <div class="container">
 
-  <form class="form-horizontal">
+  <form class="form-horizontal" ng-submit="AddPost()">
     <fieldset>
 
       <!-- Form Name -->
@@ -36,7 +36,7 @@
         <label class="col-md-4 control-label" for="txtTitle">Title</label>
 
         <div class="col-md-4">
-          <input id="txtTitle" name="txtTitle" type="text" placeholder="placeholder" class="form-control input-md">
+          <input id="txtTitle" name="txtTitle" ng-model="article.title" type="text" placeholder="placeholder" class="form-control input-md">
 
         </div>
       </div>
@@ -46,7 +46,7 @@
         <label class="col-md-4 control-label" for="txtPost">Post</label>
 
         <div class="col-md-4">
-          <textarea class="form-control" id="txtPost" name="txtPost"></textarea>
+          <textarea class="form-control" id="txtPost" ng-model="article.post" name="txtPost"></textarea>
         </div>
       </div>
 
@@ -55,7 +55,7 @@
         <label class="col-md-4 control-label" for="singlebutton"></label>
 
         <div class="col-md-4">
-          <input id="singlebutton" name="singlebutton" class="btn btn-primary" type="submit" value="Publish"/>
+          <input id="singlebutton" ng-disabled="!article.title || !article.post" name="singlebutton" class="btn btn-primary" type="submit" value="Publish"/>
         </div>
       </div>
 
