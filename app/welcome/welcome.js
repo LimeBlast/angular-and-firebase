@@ -11,8 +11,13 @@ angular.module('myApp.welcome', [
     })
   }])
 
-  .controller('WelcomeCtrl', ['$scope', 'CommonProp', function ($scope, CommonProp) {
+  .controller('WelcomeCtrl', ['$scope', '$firebase', 'CommonProp', function ($scope, $firebase, CommonProp) {
+
+    var firebaseObj = new Firebase("https://angular-and-firebase.firebaseio.com/Articles");
+    var sync = $firebase(firebaseObj);
 
     $scope.username = CommonProp.getUser();
+
+    $scope.articles = sync.$asArray();
 
   }]);

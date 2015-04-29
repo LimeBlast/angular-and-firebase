@@ -12,9 +12,9 @@ angular.module('myApp.addPost', [
 
   }])
 
-  .controller('AddPostCtrl', ['$scope', '$firebase', function ($scope, $firebase) {
+  .controller('AddPostCtrl', ['$scope', '$firebase', '$location', 'CommonProp', function ($scope, $firebase, $location, CommonProp) {
 
-    var firebaseObj = new Firebase("https://angular-and-firebase.firebaseio.com/");
+    var firebaseObj = new Firebase("https://angular-and-firebase.firebaseio.com/Articles");
     var fb = $firebase(firebaseObj);
 
     $scope.AddPost = function () {
@@ -23,9 +23,11 @@ angular.module('myApp.addPost', [
 
       fb.$push({
         title: title,
-        post: post
+        post: post,
+        emailId: CommonProp.getUser()
       }).then(function (ref) {
         console.log(ref);
+        $location.path('/welcome');
       }, function (error) {
         console.log(error);
       })
